@@ -1,5 +1,5 @@
 //This is an array of all the commands a user can execute.
-var commands = ["HELP","SMPT","SMPB","LEDU","LEDD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS"];
+var commands = ["HELP","SMPT","SMPB","LEDU","LEDD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG"];
 //This is used as a hold for when the user presses Enter.
 var input = [];
 //The text that changes for the commands.
@@ -18,6 +18,7 @@ function preload(){
 
 //Sets up everything
 function setup() {
+  
   createCanvas(windowWidth, windowHeight);
   background(0);
   
@@ -35,12 +36,20 @@ function setup() {
   //This is used later to say if the command exists.
   check = true;
   
-  maintxt = "> Terminal 10brk> A font based on computers.brk> Created by baileyldremel.brk> Type in your command now.brkbrkbrkbrk> Type HELP for help.";
+  maintxt = "> Terminal 10brk> A font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brk> Type in your command now.brkbrk> Type HELP for help.";
   entertxt="";
+  
 }
 
 
 function draw() {
+  var alertMobile = false;
+  if((windowWidth <= 800)&&(windowHeight <= 600)&&(alertMobile === false)) {
+    console.log("It's mobile");
+    alert("The terminal has detected that you are using a mobile device. This type sampler is intended for desktop use. For the full experience, please use a desktop device"); 
+    alertMobile = true;
+  }
+  
   //Redrawing the background.
   background(0);
   //The following are settings that they user can adjust.
@@ -176,6 +185,7 @@ function keyPressed(){
  //This clears the enter text as well.
  if (keyCode === BACKSPACE){
      entertxt = "";
+     keys = "";
   }
 
 }
@@ -185,7 +195,7 @@ function keyPressed(){
 
 //Help text that has 
 function HELP(){
-  maintxt = "> HELP.brk> To use this sampler, type in a four letter command then press ENTER and you will receive a response.brk> If you wish to enter the same command again, press the up arrow and then enter.brk> Here are a list of commands you can execute (PLEASE NOTE: Commands are not case sensetive):brk brk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green blue or white.brk> CLER - Clears the screen (not including the info text);";
+  maintxt = "> HELP.brk> To use this sampler, type in a four letter command then press ENTER and you will receive a response.brk> If you wish to enter the same command again, press the up arrow and then enter.brk> Here are a list of commands you can execute (PLEASE NOTE: Commands are not case sensitive):brk brk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text);";
 }
 
 function SMPT(){
@@ -249,7 +259,7 @@ function CHAR(){
 
 function COLR(){
   rcol = 255;
-  gcol = 0;
+  gcol = 51;
   bcol = 0;
   maintxt ="> Text colour changed to:brk> RED";
   
@@ -265,7 +275,7 @@ function COLG(){
 
 function COLB(){
   rcol = 0;
-  gcol = 0;
+  gcol = 179;
   bcol = 255;
   maintxt ="> Text colour changed to:brk> BLUE";
   
@@ -285,7 +295,7 @@ function CLER(){
 }
 
 function WASD(){
- maintxt = "> Check your console (Ctrl/Cmd + Shift + i)";
+ maintxt = "> Check your console (Ctrl/Cmd + Shift + j)";
  console.log("There's dust in the Gradius cartridge. Blow in the cartridge and try again.");
 }
 
@@ -305,6 +315,12 @@ function ERROR(){
   words=maintxt.split('');
   check = false;
 }
+
+//Function currently works but the screenshot includes the last letter of the command (g). Will fix soon
+//function JPEG(){
+//  keys = "";
+//  saveCanvas("Terminal", 'jpg');
+//}
 
 
 function windowResized() {
