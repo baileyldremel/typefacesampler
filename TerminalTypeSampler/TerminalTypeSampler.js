@@ -1,19 +1,31 @@
 //This is an array of all the commands a user can execute.
-var commands = ["HELP","SMPT","SMPB","LEDU","LEDD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG"];
+var commands = ["HELP","SMPT","SMPB","LEDU","LEDD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU"];
+
 //This is used as a hold for when the user presses Enter.
 var input = [];
+
 //The text that changes for the commands.
 var maintxt = "";
+
 //The text that changes for every character the user types.
 var entertxt = "";
+
 //All the non-counter variables
-var func, words, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys;
+var func, lines, words, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys;
+
 //All the counter variables, which tells you how many times I have counters.
 var i, j, k, l, m;
 
-//Loads the font.
+var hdrive, keyboard, enterkey;
+var analyzer;
+
+//Loads the font. That's all it is. 
 function preload(){
   terminal=loadFont('data/FontV6Terminal.otf');
+  hdrive = loadSound('data/HardDrive.mp3');
+  keyboard = loadSound('data/Keyboard.mp3');
+  enterkey = loadSound('data/EnterKey.mp3');
+ 
 }
 
 //Sets up everything
@@ -39,6 +51,9 @@ function setup() {
   maintxt = "> Terminal 10brk> A font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brk> Type in your command now.brkbrk> Type HELP for help.";
   entertxt="";
   
+  analyzer = new p5.Amplitude();
+  analyzer.setInput(hdrive);
+  
 }
 
 
@@ -59,16 +74,20 @@ function draw() {
   textLeading(leading);
   textAlign(alignment);
   
+  var volume = analyzer.getLevel();
+  volume*=400;
+  
   //This is a check. It's function is to check if a function exists.
   if(check === true){
     //Splits the main text into lines. I'm using the characters 'brk' to indicate a break.
     
-    words=maintxt.split('brk');
+    lines=maintxt.split('brk');
       //This for loop writes the lines of text over time.
       
-      for(i=0; i<words.length; i++){
+      for(i=0; i<lines.length; i++){
+        
         if(frameCount>30*i) {
-        text(words[i], 10, 20+(i*leading), width-10, height);
+        text(lines[i], 10, 20+(i*leading), width-10, height);
         }
       }
     }
@@ -77,7 +96,7 @@ function draw() {
   if(check === false){
     
     //Runs 25 lines of the same thing, which is the error text.
-    for(j=0; j<25; j++){
+    for(j=0; j<(size-6); j++){
       for(k=0; k<words.length; k++){
        if(frameCount>10*k) {
          text(words[k], 32*k, leading*j, width-10, height);
@@ -129,7 +148,7 @@ function keyTyped(){
   if(keyCode !== ENTER) {
     
     //Checks to see if there is a value in enter text. Without it, it would write 'Undefined' first.
-    
+    keyboard.play();
     if(entertxt === "") {
        entertxt = key;
        hold = key;
@@ -137,10 +156,12 @@ function keyTyped(){
        entertxt = entertxt+key; 
        hold = key;
     }
+    
   }
   //This code stops the program from writing enter.
   if(keyCode === ENTER){
    keys = ""; 
+   enterkey.play();
   }
 }
 
@@ -156,6 +177,9 @@ function keyPressed(){
    
    for(l=0; l<commands.length; l++){
       if(input === commands[l]) {
+        if(hdrive.isPlaying()){
+         hdrive.stop(); 
+        }
          check = true;
          func = commands[l];
          //THX to https://www.labnol.org/code/20181-call-javascript-function-by-name. Figured it out!
@@ -170,7 +194,8 @@ function keyPressed(){
    //If execute is still false.
    if (!execute){
      //This is a special function that changes the text.
-     ERROR(); 
+     ERROR();
+     hdrive.play();
    }
    //Blanks entertext.
    entertxt = "";
@@ -179,7 +204,9 @@ function keyPressed(){
  
  //This function adds the previous function back into the enter text, which can be used.
  if (keyCode === UP_ARROW) {
-   entertxt = func;
+   if(func != ""){
+     entertxt = func;
+   }
  }
  
  //This clears the enter text as well.
@@ -187,7 +214,6 @@ function keyPressed(){
      entertxt = "";
      keys = "";
   }
-
 }
 
 
@@ -248,7 +274,7 @@ function ABOT(){
 }
 
 function HWLD(){
- maintxt = "> HELLO WORLDbrk> by Louie Zongbrkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brkbrk> Find by voicebrk> Although it sounds like bits and bytesbrk> My circuitry is is filled with mitesbrk> Hello, worldbrkbrk> Oh, will I find a lovebrk> Oh, or a power plugbrk> Oh, digitally isolatedbrk> Oh, creator, please don't leave me waiting.brkbrk> Hello, worldbrk > Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brk> https://www.youtube.com/watch?v=Yw6u6YkTgQ4";
+ maintxt = "> HELLO WORLDbrk> by Louie Zongbrkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brkbrk> Find by voicebrk> Although it sounds like bits and bytesbrk> My circuitry is is filled with mitesbrk> Hello, worldbrkbrk> Oh, will I find a lovebrk> Oh, or a power plugbrk> Oh, digitally isolatedbrk> Oh, creator, please don't leave me waiting.brkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brk> https://www.youtube.com/watch?v=Yw6u6YkTgQ4";
  window.open("https://www.youtube.com/watch?v=Yw6u6YkTgQ4", "_blank", 'toolbar=0,location=0,menubar=0');
 }
 
@@ -281,6 +307,13 @@ function COLB(){
   
 }
 
+function RNBW(){
+ rcol = random(0, 240);
+ gcol = random(0, 240);
+ bcol = random(0, 240);
+ maintxt = "> Fill colour changed randomlybrkbrk"+maintxt;
+}
+
 function COLW(){
   rcol = 255;
   gcol = 255;
@@ -302,12 +335,26 @@ function WASD(){
 function BLDR(){
  maintxt="> |                    |brk> |_ _         _ _|brk> |  .   \u005C  /  .  |brk> |_ _/    \u005C_ _|brk>            /brk>         / _ _brkbrk> baileyldremel was here 2021";
 }
+
 function EROR(){
  alert("Did you expect an error? Not gonna happen! Try something else."); 
 }
 
 function EGGS(){
-  maintxt="> S3cr3T C0d3sbrkbrk> HWLDbrk> BLDRbrk> ERORbrk> WASD";
+  maintxt="> S3cr3T C0d3sbrkbrk> HWLDbrk> BLDRbrk> ERORbrk> WASDbrk> TRONbrk> NGYUbrk> RNBW";
+}
+
+function NGYU(){
+  maintxt="> Loading...brkbrkbrkbrkbrkbrkbrk> ;)";
+  window.open("https://www.youtube.com/watch?v=ahnfLZKwnTg", "_blank", 'toolbar=0,location=0,menubar=0');
+  
+}
+
+function TRON(){
+  maintxt="> ACCESS CODE 6brk> PASWORD SERIES PS 17brk> REINDEER FLOTILLAbrkbrk> CODE SERIES LSU-123...";
+  rcol = 0;
+  gcol = 123;
+  bcol = 255;
 }
 
 function ERROR(){
@@ -325,5 +372,5 @@ function ERROR(){
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  text(words[i], 10, 20+(i*leading), width-10, height);
+  text(lines[i], 10, 20+(i*leading), width-10, height);
 }
