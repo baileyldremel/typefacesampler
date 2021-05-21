@@ -11,13 +11,13 @@ var maintxt = "";
 var entertxt = "";
 
 //All the non-counter variables
-var func, lines, words, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys;
+var func, lines, rand, words, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys;
 
 //All the counter variables, which tells you how many times I have counters.
 var i, j, k, l, m;
 
 var hdrive, keyboard, enterkey;
-var analyzer;
+
 
 //Loads the font. That's all it is. 
 function preload(){
@@ -48,11 +48,10 @@ function setup() {
   //This is used later to say if the command exists.
   check = true;
   
-  maintxt = "> Terminal 10brk> A font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brk> Type in your command now.brkbrk> Type HELP for help.";
+  maintxt = "> Terminal-Xbrk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> HOW TO USE SAMPLERbrk> Press a four letter command then press ENTER on you keyboard.brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brkbrk> Type HELP to view the full list of commands.";
   entertxt="";
   
-  analyzer = new p5.Amplitude();
-  analyzer.setInput(hdrive);
+
   
 }
 
@@ -74,8 +73,6 @@ function draw() {
   textLeading(leading);
   textAlign(alignment);
   
-  var volume = analyzer.getLevel();
-  volume*=400;
   
   //This is a check. It's function is to check if a function exists.
   if(check === true){
@@ -166,7 +163,9 @@ function keyTyped(){
 }
 
 function keyPressed(){
- //Resets input. 
+ //Resets input.
+
+ hdrive.stop(); 
  input = [];
  if (keyCode === ENTER) {
    
@@ -177,9 +176,7 @@ function keyPressed(){
    
    for(l=0; l<commands.length; l++){
       if(input === commands[l]) {
-        if(hdrive.isPlaying()){
-         hdrive.stop(); 
-        }
+      
          check = true;
          func = commands[l];
          //THX to https://www.labnol.org/code/20181-call-javascript-function-by-name. Figured it out!
@@ -358,7 +355,17 @@ function TRON(){
 }
 
 function ERROR(){
-  maintxt="ERRORCOMMANDNOTFOUNDERRORCOMMANDNOTFOUNDERRORCOMMANDNOTFOUND";
+  maintxt="";
+  for(n = 0; n<50; n++){
+   rand = int(random(33, 126));
+   letter = char(rand);
+   if(maintxt == ""){
+    maintxt = letter;
+   }else{
+    maintxt = maintxt + letter; 
+   }
+  }
+  //maintxt="ERRORCOMMANDNOTFOUNDERRORCOMMANDNOTFOUNDERRORCOMMANDNOTFOUND";
   words=maintxt.split('');
   check = false;
 }
