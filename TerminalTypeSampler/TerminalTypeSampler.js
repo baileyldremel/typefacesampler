@@ -1,5 +1,5 @@
 //This is an array of all the commands a user can execute.
-var commands = ["HELP","SMPT","SMPB","LEDU","LEDD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU"];
+var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU"];
 
 //This is used as a hold for when the user presses Enter.
 var input = [];
@@ -120,6 +120,12 @@ function draw() {
   
   //Info text, which sits in the top right corner of the screen.
   push();
+    push();
+      strokeWeight(2);
+      stroke(0);
+      fill(0);
+      rect(width*0.74, 0, 400, 40);
+    pop();
     textSize(24);
     textAlign(RIGHT);
     textLeading(32);
@@ -218,7 +224,7 @@ function keyPressed(){
 
 //Help text that has 
 function HELP(){
-  maintxt = "> HELP.brk> To use this sampler, type in a four letter command then press ENTER and you will receive a response.brk> If you wish to enter the same command again, press the up arrow and then enter.brk> Here are a list of commands you can execute (PLEASE NOTE: Commands are not case sensitive):brk brk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text);";
+  maintxt = "> HELP.brk> To use this sampler, type in a four letter command then press ENTER and you will receive a response.brk> If you wish to enter the same command again, press the up arrow and then enter.brk> Here are a list of commands you can execute (PLEASE NOTE: Commands are not case sensitive):brk brk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text)brk> DWLD - Downloads Terminal-X for you to use.";
 }
 
 function SMPT(){
@@ -352,6 +358,11 @@ function TRON(){
   rcol = 0;
   gcol = 123;
   bcol = 255;
+}
+
+function DWLD(){
+  maintxt="> DOWNLOAD FONTbrkbrk> Downloading font now, please check your downloads.";
+  window.open("https://github.com/baileyldremel/typefacesampler/raw/main/TerminalTypeSampler/data/FontV6Terminal.otf", "_parent", 'toolbar=0,location=0,menubar=1');
 }
 
 function ERROR(){
