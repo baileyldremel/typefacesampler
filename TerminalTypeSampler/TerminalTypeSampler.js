@@ -48,7 +48,7 @@ function setup() {
   //This is used later to say if the command exists.
   check = true;
   
-  maintxt = "> Terminal-Xbrk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> HOW TO USE SAMPLERbrk> Press a four letter command then press ENTER on you keyboard.brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brkbrk> Type HELP to view the full list of commands.";
+  maintxt = "> Terminal-10brk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> HOW TO USE SAMPLERbrk> Press a four letter command then press ENTER on you keyboard.brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brkbrk> Type HELP to view the full list of commands.";
   entertxt="";
   
 
@@ -108,8 +108,11 @@ function draw() {
     push();
       strokeWeight(2);
       stroke(255);
+ 
+      line(0, height-54, width, height-54);
       fill(0);
-      rect(-20, height-50, width+30, 80);
+      noStroke();
+      rect(0,height-54,width, height-54);
     pop();
     //This is for the enter text, where the user enters their command.
     textSize(32);
@@ -224,7 +227,7 @@ function keyPressed(){
 
 //Help text that has 
 function HELP(){
-  maintxt = "> HELP.brk> To use this sampler, type in a four letter command then press ENTER and you will receive a response.brk> If you wish to enter the same command again, press the up arrow and then enter.brk> Here are a list of commands you can execute (PLEASE NOTE: Commands are not case sensitive):brk brk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text)brk> DWLD - Downloads Terminal-X for you to use.";
+  maintxt = "> HELP.brk> To use this sampler, type in a four letter command then press ENTER and you will receive a response.brk> If you make a mistake, press the BACKSPACE button and type your command.brk> If you wish to enter the same command again, press the UP ARROW and then ENTER.brkbrk> Here are a list of commands you can execute (PLEASE NOTE: Commands are not case sensitive):brk brk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text)brk> DWLD - Downloads Terminal-X for you to use.";
 }
 
 function SMPT(){
@@ -361,12 +364,13 @@ function TRON(){
 }
 
 function DWLD(){
-  maintxt="> DOWNLOAD FONTbrkbrk> Downloading font now, please check your downloads.";
+  maintxt="> DOWNLOAD FONTbrkbrk> Downloading font now, please check your downloads.brkbrk> WARNING!!!brk> The font may be unstable to use. Please proceed with caution.brk> When not using the font, please uninstall it to avoid computer crashes.brk> You may reinstall it through here or from the download file.";
   window.open("https://github.com/baileyldremel/typefacesampler/raw/main/TerminalTypeSampler/data/FontV6Terminal.otf", "_parent", 'toolbar=0,location=0,menubar=1');
 }
 
 function ERROR(){
   maintxt="";
+  alignment = LEFT;
   for(n = 0; n<50; n++){
    rand = int(random(33, 126));
    letter = char(rand);
@@ -376,7 +380,6 @@ function ERROR(){
     maintxt = maintxt + letter; 
    }
   }
-  //maintxt="ERRORCOMMANDNOTFOUNDERRORCOMMANDNOTFOUNDERRORCOMMANDNOTFOUND";
   words=maintxt.split('');
   check = false;
 }
