@@ -376,7 +376,7 @@ function CLER(){
 //Downloads the font to the users computer.
 function DWLD(){
   maintxt="> DOWNLOAD FONTbrkbrk> Downloading font now, please check your downloads.brkbrk> WARNING!!!brk> The font may be unstable to use. Please proceed with caution.brk> When not using the font, please uninstall it to avoid computer crashes.brk> You may reinstall it through here or from the download file.";
-  window.open("https://github.com/baileyldremel/typefacesampler/raw/main/TerminalTypeSampler/data/FontV6Terminal.otf", "_parent", 'toolbar=0,location=0,menubar=1');
+  window.open("https://github.com/baileyldremel/typefacesampler/raw/main/TerminalTypeSampler/data/Terminal10.otf", "_parent", 'toolbar=0,location=0,menubar=1');
 }
 
 //EASTER EGGS (Not essential but just for fun)
