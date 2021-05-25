@@ -1,3 +1,5 @@
+//THIS IS CURRENTLY VERSION 6 OF THE TYPE SAMPLER
+
 //This is an array of all the commands a user can execute.
 var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU"];
 
