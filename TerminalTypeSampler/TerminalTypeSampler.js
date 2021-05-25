@@ -1,7 +1,7 @@
-//THIS IS CURRENTLY VERSION 6 OF THE TYPE SAMPLER
+//This is version 7 of the type sampler.
 
 //This is an array of all the commands a user can execute.
-var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU"];
+var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU", "RSET"];
 
 //This is used as a hold for when the user presses Enter.
 var input = [];
@@ -56,7 +56,7 @@ function setup() {
   //This is used later to say if the command exists.
   check = true;
   
-  maintxt = "> Terminal-10brk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> HOW TO USE SAMPLERbrk> Press a four letter command then press ENTER on you keyboard.brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brkbrk> Type HELP to view the full list of commands.";
+  maintxt = "> Terminal-10brk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> !HOW TO USE SAMPLER!brk> Type in a four letter command then press [ENTER] on your keyboard (commands are in uppercase).brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brk> If you wish to reset the everything, type RSET.brkbrk> Type HELP to view the full list of commands.";
   entertxt="";
   
 
@@ -105,8 +105,8 @@ function draw() {
   if(check === false){
     
     //Runs multiple lines of error characters.
-    for(j=0; j<(size-6); j++){
-      for(k=0; k<words.length; k++){
+    for(j=0; j<(size); j++){
+      for(k=0; k<words.length; k++) {
        if(frameCount>10*k) {
          text(words[k], 32*k, leading*j, width-10, height);
          }
@@ -265,17 +265,17 @@ function keyPressed(){
 //MAIN FUNCTIONS (Stuff that is useful to the sampler)
 //Help text that has all the main functions in it.  
 function HELP(){
-  maintxt = "> HELP.brk> To use this sampler, type in a four letter command then press ENTER and you will receive a response.brk> If you make a mistake, press the BACKSPACE button and type your command.brk> If you wish to enter the same command again, press the UP ARROW and then ENTER.brkbrk> Here are a list of commands you can execute (PLEASE NOTE: Commands are not case sensitive):brk brk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text)brk> DWLD - Downloads Terminal-X for you to use.";
+  maintxt = "> HELPbrk> To use this sampler, type in a four letter command then press [ENTER] and you will receive a response.brk> If you make a mistake, press the [BACKSPACE] button and type your command.brk> If you wish to enter the same command again, press the [UP ARROW] and then [ENTER].brkbrk> Here are a list of commands you can execute (!PLEASE NOTE!: Commands are not case sensitive):brkbrk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text)brk> DWLD - Downloads Terminal-10 for you to use.brk> RSET - Resets everything back to default valuesbrkbrk> The list is not complete, some of the commands may be hiding in their EGGS.";
 }
 
 //Adds the pangram.
 function SMPT(){
-  maintxt = "> SAMPLE TEXT brk> Currently at "+size+"pt.brk brk> Five quacking zephyrs jolt my wax bed.";
+  maintxt = "> !SAMPLE TEXT! brk> Currently at "+size+"pt.brk brk> Five quacking zephyrs jolt my wax bed.";
 }
 
 //Adds a body paragraph.
 function SMPB(){
-  maintxt = "> SAMPLE BODYCOPY brk> Currently at "+size+"pt with "+leading+"pt leading. brkbrk> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+  maintxt = "> !SAMPLE BODYCOPY! brk> Currently at "+size+"pt with "+leading+"pt leading. brkbrk> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 }
 
 //LEADING SETTINGS
@@ -327,12 +327,12 @@ function ALGR(){
 
 //Writes text about the font.
 function ABOT(){
-  maintxt ="> ABOUT TERMINAL-10brkbrk> Terminal-10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> The typeface was inspired by the Mike Kellys VR and Nillands typefaces,brkthe computer programming typefaces of old and new, as well computer terminals.";
+  maintxt ="> !ABOUT TERMINAL-10!brkbrk> Terminal-10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> The typeface was inspired by the Mike Kellys VR and Nillands typefaces,brkthe computer programming typefaces of old and new, as well computer terminals.";
 }
 
 //Writes all the characters of the font.
 function CHAR(){
-  maintxt ="> CHARACTERSbrkbrk> UPPERCASE:brk> ABCDEFGHIJKLMNOPQRSTUVWXYZbrkbrk> Lowercase:brk> abcefghijklmnopqrstuvwxyzbrkbrk> Numbers:brk> 0123456789brkbrk> Other Charactersbrk> ! ? @ # $ % ^ & * ( ) { } [ ] + - = \ | / ; : \' \" , . < > ~  \`";
+  maintxt ="> !CHARACTERS!brkbrk> UPPERCASE:brk> ABCDEFGHIJKLMNOPQRSTUVWXYZbrkbrk> Lowercase:brk> abcefghijklmnopqrstuvwxyzbrkbrk> Numbers:brk> 0123456789brkbrk> Other Charactersbrk> ! ? @ # $ % ^ & * ( ) { } [ ] + - = \ | / ; : \' \" , . < > ~  \`";
 }
 
 //COLOUR CHANGES
@@ -341,7 +341,7 @@ function COLR(){
   rcol = 255;
   gcol = 51;
   bcol = 0;
-  maintxt ="> Text colour changed to:brk> RED";
+  maintxt ="> Text colour changed to:brk> !RED!";
   
 }
 
@@ -350,7 +350,7 @@ function COLG(){
   rcol = 0;
   gcol = 255;
   bcol = 0;
-  maintxt ="> Text colour changed to:brk> GREEN";
+  maintxt ="> Text colour changed to:brk> !GREEN!";
 }
 
 //Changes colour to blue
@@ -358,7 +358,7 @@ function COLB(){
   rcol = 0;
   gcol = 179;
   bcol = 255;
-  maintxt ="> Text colour changed to:brk> BLUE";
+  maintxt ="> Text colour changed to:brk> !BLUE!";
   
 }
 
@@ -367,7 +367,7 @@ function COLW(){
   rcol = 255;
   gcol = 255;
   bcol = 255;
-  maintxt ="> Text colour changed to:brk> WHITE";
+  maintxt ="> Text colour changed to:brk> !WHITE!";
 }
 
 //Clears the main txt
@@ -375,16 +375,26 @@ function CLER(){
  maintxt  = "";
 }
 
+function RSET(){
+  rcol = 0;
+  gcol = 255;
+  bcol = 0;
+  alignment = LEFT;
+  size = 32;
+  leading = 32;
+  maintxt = "> !RESET!brkbrk> Colour reset to greenbrk> Text size and leading reset to 32ptbrk> Alignment reset to the left";
+}
+
 //Downloads the font to the users computer.
 function DWLD(){
-  maintxt="> DOWNLOAD FONTbrkbrk> Downloading font now, please check your downloads.brkbrk> WARNING!!!brk> The font may be unstable to use. Please proceed with caution.brk> When not using the font, please uninstall it to avoid computer crashes.brk> You may reinstall it through here or from the download file.";
+  maintxt="> !DOWNLOAD FONT!brkbrk> Downloading font now, please check your downloads.brkbrk> WARNING!!!brk> The font may be unstable to use. Please proceed with caution.brk> When not using the font, please uninstall it to avoid computer crashes.brk> You may reinstall it through here or from the download file.";
   window.open("https://github.com/baileyldremel/typefacesampler/raw/main/TerminalTypeSampler/data/Terminal10.otf", "_parent", 'toolbar=0,location=0,menubar=1');
 }
 
 //EASTER EGGS (Not essential but just for fun)
 //Displays all the easter eggs within the sampler
 function EGGS(){
-  maintxt="> S3cr3T C0d3sbrkbrk> HWLDbrk> BLDRbrk> ERORbrk> WASDbrk> TRONbrk> NGYUbrk> RNBW";
+  maintxt="> ?S3cr3T C0d3s?brkbrk> HWLDbrk> BLDRbrk> ERORbrk> WASDbrk> TRONbrk> NGYUbrk> RNBW";
 }
 
 //Selects a random fill colour.
@@ -397,36 +407,37 @@ function RNBW(){
 
 //Plays a song called 'hello world' by Louie Zong in a new window.
 function HWLD(){
- maintxt = "> HELLO WORLDbrk> by Louie Zongbrkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brkbrk> Find by voicebrk> Although it sounds like bits and bytesbrk> My circuitry is is filled with mitesbrk> Hello, worldbrkbrk> Oh, will I find a lovebrk> Oh, or a power plugbrk> Oh, digitally isolatedbrk> Oh, creator, please don't leave me waiting.brkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brk> https://www.youtube.com/watch?v=Yw6u6YkTgQ4";
+ maintxt = "> ?HELLO WORLD?brk> by Louie Zongbrkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brkbrk> Find by voicebrk> Although it sounds like bits and bytesbrk> My circuitry is is filled with mitesbrk> Hello, worldbrkbrk> Oh, will I find a lovebrk> Oh, or a power plugbrk> Oh, digitally isolatedbrk> Oh, creator, please don't leave me waiting.brkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brk> https://www.youtube.com/watch?v=Yw6u6YkTgQ4";
  window.open("https://www.youtube.com/watch?v=Yw6u6YkTgQ4", "_blank", 'toolbar=0,location=0,menubar=0');
 }
 
 //Writes something to the console.
 function WASD(){
- maintxt = "> Check your console (Ctrl/Cmd + Shift + j)";
+ maintxt = "> ?WASD?brk> Check your console (Ctrl/Cmd + Shift + j)";
  console.log("There's dust in the Gradius cartridge. Blow in the cartridge and try again.");
 }
 
 //Writes my icon to the screen
 function BLDR(){
- maintxt="> |                    |brk> |_ _         _ _|brk> |  .   \u005C  /  .  |brk> |_ _/    \u005C_ _|brk>            /brk>         / _ _brkbrk> baileyldremel was here 2021";
+ maintxt="> ?BLDR?brk> |                    |brk> |_ _         _ _|brk> |  .   \u005C  /  .  |brk> |_ _/    \u005C_ _|brk>            /brk>         / _ _brkbrk> baileyldremel was here 2021";
 }
 
 //Sends an alert to the browser.
 function EROR(){
+  maintxt="> ?EROR?brk> What do you think you're doing?";
  alert("Did you expect an error? Not gonna happen! Try something else."); 
 }
 
 //Plays a video in a new browser screen.
 function NGYU(){
-  maintxt="> Loading...brkbrkbrkbrkbrkbrkbrk> ;)";
+  maintxt="> ?NGYU?brk> Loading...brkbrkbrkbrkbrkbrkbrk> ;)";
   window.open("https://www.youtube.com/watch?v=ahnfLZKwnTg", "_blank", 'toolbar=0,location=0,menubar=0');
   
 }
 
 //Changes the colour of the text and writes a quote from TRON
 function TRON(){
-  maintxt="> ACCESS CODE 6brk> PASWORD SERIES PS 17brk> REINDEER FLOTILLAbrkbrk> CODE SERIES LSU-123...";
+  maintxt="> ?TRON?brk> ACCESS CODE 6brk> PASWORD SERIES PS 17brk> REINDEER FLOTILLAbrkbrk> CODE SERIES LSU-123...";
   rcol = 0;
   gcol = 123;
   bcol = 255;
