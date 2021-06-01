@@ -1,4 +1,4 @@
-//This is Version 8 of the type sampler
+//Version 9 here we go.
 
 //This is an array of all the commands a user can execute.
 var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU", "RSET", "ATTK"];
@@ -13,7 +13,7 @@ var maintxt = "";
 var entertxt = "";
 
 //All the non-counter variables
-var func, lines, rand, words, filling, characters, brkk, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys, breaks;
+var func, lines, rand, words, filling, characters, brkk, screensize, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys, breaks;
 
 //All the counter variables, which tells you how many times I have counters.
 var i, j, k, l, m, n, p;
@@ -21,6 +21,7 @@ var i, j, k, l, m, n, p;
 //Variables for the sounds
 var hdrive, keyboard, enterkey;
 
+var awin, kwin;
 
 //Loads the font and the sounds. 
 function preload(){
@@ -60,19 +61,24 @@ function setup() {
   //This is used later to say if the command exists.
   check = true;
   
+  
+  //Egg stuff
+  awin = 0;
+  kwin = 0;
+  
   maintxt = "> Terminal-10brk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> !HOW TO USE SAMPLER!brk> Type in a four letter command then press [ENTER] on your keyboard (commands are in uppercase).brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brk> If you wish to reset the everything, type RSET.brkbrk> Type HELP to view the full list of commands.";
   entertxt="";
-  
-
   
 }
 
 
 function draw() {
   
+ 
   //Redrawing the background so the font doesn't get fuzzy.
   background(0);
   
+  screensize = round(width/11);
   
   //The following are settings that they user can adjust.
   //The adjustments can be done to the fill colour, text size, leading and the alignment.
@@ -89,13 +95,14 @@ function draw() {
     lines=maintxt.split('brk');
       breaks = 1;
       brkk = 0;
+      
       //This for loop writes the lines of text over time.
       for(i=0; i<lines.length; i++){
-        
-        filling = 132 - size;
-        
-        //This chunk of code checks to see how many characters there are in the line. If it's over the filling, it adds more line breaks so it doesn't overlap itself.
+        filling = screensize - size;
         characters = lines[i].split('');
+        
+        //This is checking to see if the line's character length is longer than the filling for the screen.
+        //I am calling this the Line Breaks code.
         if(characters.length > filling){
           for(p = 0; p < characters.length; p++){
             if(p === (filling*breaks)){
@@ -108,7 +115,7 @@ function draw() {
         //Every 30 frames the line of text is drawn.
         if(frameCount>30*i) {
           
-        text(lines[i], 10, 20+(i*leading)+(brkk), width-10, height);
+        text(lines[i], 10, 30+(i*leading)+(brkk), width-10, height);
         
         if(breaks > 1){
           if(breaks == 1){
@@ -285,6 +292,8 @@ function keyPressed(){
 //MAIN FUNCTIONS (Stuff that is useful to the sampler)
 //Help text that has all the main functions in it.  
 function HELP(){
+  size = 32;
+  leading = 32;
   maintxt = "> HELPbrk> To use this sampler, type in a four letter command then press [ENTER] and you will receive a response.brk> If you make a mistake, press the [BACKSPACE] button and type your command.brk> If you wish to enter the same command again, press the [UP ARROW] and then [ENTER].brkbrk> Here are a list of commands you can execute (!PLEASE NOTE!: Commands are not case sensitive):brkbrk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text)brk> DWLD - Downloads Terminal-10 for you to use.brk> RSET - Resets everything back to default valuesbrkbrk> The list is not complete, some of the commands may be hiding in their EGGS.";
 }
 
@@ -302,13 +311,13 @@ function SMPB(){
 //Leading is increased by 2
 function LEDU(){
   leading = leading + 2;
-  maintxt ="> Increasing leading...  brk> Leading is now equal to "+leading+"pt";
+  maintxt ="> !LEDU!brk> Increasing leading...  brk> Leading is now equal to "+leading+"ptbrkbrk> Press the [UP ARROW] then [ENTER] to increase it further.";
 }
 
 //Leading is decreased by 2
 function LEDD(){
   leading = leading - 2;
-  maintxt =">Decreasing leading...brk>Leading is now equal to "+leading+"pt";
+  maintxt ="> !LEDD!brk> Decreasing leading...brk>Leading is now equal to "+leading+"ptbrkbrk> Press the [UP ARROW] then [ENTER] to decrease it further.";
 }
 
 //SIZE SETTINGS
@@ -316,33 +325,33 @@ function LEDD(){
 function SIZU(){
   size = size + 4;
   leading = size;
-  maintxt ="> Increasing pointsize... brk> Font is now "+size+"pt. Leading is adjusted accordingly.";
+  maintxt ="> !SIZU!brk> Increasing pointsize... brk> Font is now "+size+"pt. Leading is adjusted accordingly.brkbrk> Press the [UP ARROW] then [ENTER] to increase it further";
 }
 
 //Size is decreased by 4
 function SIZD(){
   size = size - 4;
   leading = size;
-  maintxt = "> Decreasing pointsize...brk> Font is now "+size+"pt. Leading is adjusted accordingly";
+  maintxt = "> !SIZD!brk> Decreasing pointsize...brk> Font is now "+size+"pt. Leading is adjusted accordingly.brkbrk> Press the [UP ARROW] then [ENTER] to decrease it further";
 }
 
 //ALIGNMENT SETTINGS
 //Alignment Left
 function ALGL(){
   alignment = LEFT;
-  maintxt ="> Changing text alignment...brk> Now aligned to the left.";
+  maintxt ="> !ALGL!brk> Changing text alignment...brk> Now aligned to the left.";
 }
 
 //Alignment Center
 function ALGC(){
   alignment = CENTER;
-  maintxt ="> Changing text alignment...brk> Now centrally aligned";
+  maintxt ="> !ALGC!brk> Changing text alignment...brk> Now centrally aligned";
 }
 
 //Alignment Right
 function ALGR(){
   alignment = RIGHT;
-  maintxt ="> Changing text alignment...brk> Now aligned to the right";
+  maintxt ="> !ALGR!brk> Changing text alignment...brk> Now aligned to the right";
 }
 
 //Writes text about the font.
@@ -428,6 +437,8 @@ function RNBW(){
 
 //Plays a song called 'hello world' by Louie Zong in a new window.
 function HWLD(){
+ size = 32;
+ leading = 32;
  maintxt = "> ?HELLO WORLD?brk> by Louie Zongbrkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brkbrk> Find by voicebrk> Although it sounds like bits and bytesbrk> My circuitry is is filled with mitesbrk> Hello, worldbrkbrk> Oh, will I find a lovebrk> Oh, or a power plugbrk> Oh, digitally isolatedbrk> Oh, creator, please don't leave me waiting.brkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brk> https://www.youtube.com/watch?v=Yw6u6YkTgQ4";
  window.open("https://www.youtube.com/watch?v=Yw6u6YkTgQ4", "_blank", 'toolbar=0,location=0,menubar=0');
 }
@@ -469,11 +480,13 @@ function ATTK(){
   let coin = random(0,2);
   
   if(coin <1){
-   maintxt="> ?ATTK?brk> Who would win in a battle between A and K?brkbrkbrk> A wins, amazing the crowd with their many glyphs and characters!";
+   awin = awin + 1;
+   maintxt="> ?ATTK?brk> Who would win in a battle between A and K?brkbrk> A wins, amazing the crowd with their many glyphs and characters!brkbrk> A wins = "+awin+".brk> K wins = "+kwin+".";
   }
   
   if(coin >1){
-    maintxt="> ?ATTK?brk> Who would win in a battle between A and K?brkbrkbrk> K wins, mystifying the crowd with their wiggles and dancing!";
+    kwin = kwin + 1;
+    maintxt="> ?ATTK?brk> Who would win in a battle between A and K?brkbrk> K wins, mystifying the crowd with their wiggles and dancing!brkbrk> A wins = "+awin+".brk> K wins = "+kwin+".";
   }
 }
 
