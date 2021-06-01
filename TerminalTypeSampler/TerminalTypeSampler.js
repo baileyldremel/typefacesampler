@@ -1,7 +1,7 @@
-//This is version 7 of the type sampler.
+//This is Version 8 of the type sampler
 
 //This is an array of all the commands a user can execute.
-var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU", "RSET"];
+var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU", "RSET", "ATTK"];
 
 //This is used as a hold for when the user presses Enter.
 var input = [];
@@ -13,10 +13,10 @@ var maintxt = "";
 var entertxt = "";
 
 //All the non-counter variables
-var func, lines, rand, words, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys;
+var func, lines, rand, words, filling, characters, brkk, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys, breaks;
 
 //All the counter variables, which tells you how many times I have counters.
-var i, j, k, l, m;
+var i, j, k, l, m, n, p;
 
 //Variables for the sounds
 var hdrive, keyboard, enterkey;
@@ -37,10 +37,14 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0);
   
+  //Custom cursor.
+  cursor('data/cursor.png');
+  
   //Text stuff.
   //Sets the font and makes it have no stroke.
   noStroke();
   textFont(terminal);
+  breaks = 0;
   
   //All these values are variables as the user can change them at will.
   size = 32;
@@ -66,17 +70,9 @@ function setup() {
 
 function draw() {
   
-  //This function is supposed to check if a user is on a mobile device. 
-  var alertMobile = false;
-  if((windowWidth <= 800)&&(windowHeight <= 600)&&(alertMobile === false)) {
-    console.log("It's mobile");
-    alert("The terminal has detected that you are using a mobile device. This type sampler is intended for desktop use. For the full experience, please use a desktop device"); 
-    alertMobile = true;
-  }
-  
   //Redrawing the background so the font doesn't get fuzzy.
-  
   background(0);
+  
   
   //The following are settings that they user can adjust.
   //The adjustments can be done to the fill colour, text size, leading and the alignment.
@@ -91,16 +87,40 @@ function draw() {
     
     //Splits the main text into lines. I'm using the characters 'brk' to indicate a break.
     lines=maintxt.split('brk');
-    
+      breaks = 1;
+      brkk = 0;
       //This for loop writes the lines of text over time.
       for(i=0; i<lines.length; i++){
+        
+        filling = 132 - size;
+        
+        //This chunk of code checks to see how many characters there are in the line. If it's over the filling, it adds more line breaks so it doesn't overlap itself.
+        characters = lines[i].split('');
+        if(characters.length > filling){
+          for(p = 0; p < characters.length; p++){
+            if(p === (filling*breaks)){
+             breaks = breaks+1;
+            }
+          }
+        } else {
+         characters = ''; 
+        }
         //Every 30 frames the line of text is drawn.
         if(frameCount>30*i) {
-        text(lines[i], 10, 20+(i*leading), width-10, height);
+          
+        text(lines[i], 10, 20+(i*leading)+(brkk), width-10, height);
+        
+        if(breaks > 1){
+          if(breaks == 1){
+           brkk = leading * 1; 
+          }else{
+            brkk = leading * (breaks-1);  
+          }
+         }
         }
-      }
+       }
+      
     }
-    
   //If the command doesn't exist in the array, it runs this code instead.  
   if(check === false){
     
@@ -275,7 +295,7 @@ function SMPT(){
 
 //Adds a body paragraph.
 function SMPB(){
-  maintxt = "> !SAMPLE BODYCOPY! brk> Currently at "+size+"pt with "+leading+"pt leading. brkbrk> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+  maintxt = "> !SAMPLE BODYCOPY! brk> Currently at "+size+"pt with "+leading+"pt leading. brkbrk> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.brk> Testingbrk> 1, 2, 3";
 }
 
 //LEADING SETTINGS
@@ -327,12 +347,12 @@ function ALGR(){
 
 //Writes text about the font.
 function ABOT(){
-  maintxt ="> !ABOUT TERMINAL-10!brkbrk> Terminal-10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> The typeface was inspired by the Mike Kellys VR and Nillands typefaces,brkthe computer programming typefaces of old and new, as well computer terminals.";
+  maintxt ="> !ABOUT TERMINAL-10!brkbrk> Terminal-10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> The typeface was inspired by the Mike Kellys VR and Nillands typefaces, the computer programming typefaces of old and new, as well computer terminals.";
 }
 
 //Writes all the characters of the font.
 function CHAR(){
-  maintxt ="> !CHARACTERS!brkbrk> UPPERCASE:brk> ABCDEFGHIJKLMNOPQRSTUVWXYZbrkbrk> Lowercase:brk> abcefghijklmnopqrstuvwxyzbrkbrk> Numbers:brk> 0123456789brkbrk> Other Charactersbrk> ! ? @ # $ % ^ & * ( ) { } [ ] + - = \ | / ; : \' \" , . < > ~  \`";
+  maintxt ="> !CHARACTERS!brkbrk> UPPERCASE:brk> ABCDEFGHIJKLMNOPQRSTUVWXYZbrkbrk> Lowercase:brk> abcefghijklmnopqrstuvwxyzbrkbrk> Numbers:brk> 0123456789brkbrk> Other Charactersbrk> ! ? @ # $ % ^ & * ( ) { } [ ] + - = \ | / ; : \' \" , . < > ~  \`brkbrk> Type a character to view it at a larger size";
 }
 
 //COLOUR CHANGES
@@ -375,6 +395,7 @@ function CLER(){
  maintxt  = "";
 }
 
+//Resets everything back to the default values
 function RSET(){
   rcol = 0;
   gcol = 255;
@@ -394,7 +415,7 @@ function DWLD(){
 //EASTER EGGS (Not essential but just for fun)
 //Displays all the easter eggs within the sampler
 function EGGS(){
-  maintxt="> ?S3cr3T C0d3s?brkbrk> HWLDbrk> BLDRbrk> ERORbrk> WASDbrk> TRONbrk> NGYUbrk> RNBW";
+  maintxt="> ?S3cr3T C0d3s?brkbrk> HWLDbrk> BLDRbrk> ERORbrk> WASDbrk> TRONbrk> NGYUbrk> RNBWbrk> ATTK";
 }
 
 //Selects a random fill colour.
@@ -441,6 +462,19 @@ function TRON(){
   rcol = 0;
   gcol = 123;
   bcol = 255;
+}
+
+//Battle between A and K
+function ATTK(){
+  let coin = random(0,2);
+  
+  if(coin <1){
+   maintxt="> ?ATTK?brk> Who would win in a battle between A and K?brkbrkbrk> A wins, amazing the crowd with their many glyphs and characters!";
+  }
+  
+  if(coin >1){
+    maintxt="> ?ATTK?brk> Who would win in a battle between A and K?brkbrkbrk> K wins, mystifying the crowd with their wiggles and dancing!";
+  }
 }
 
 
