@@ -1,7 +1,7 @@
-//Version 9 here we go.
+//Version 10 here we go.
 
 //This is an array of all the commands a user can execute.
-var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU", "RSET", "ATTK"];
+var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU", "RSET", "ATTK", "FACE", "ASPO", "NIER", "LGHT"];
 
 //This is used as a hold for when the user presses Enter.
 var input = [];
@@ -13,7 +13,10 @@ var maintxt = "";
 var entertxt = "";
 
 //All the non-counter variables
-var func, lines, rand, words, filling, characters, brkk, screensize, check, terminal, leading, tracking, size, alignment, rcol, gcol, bcol, keys, breaks;
+var func, lines, rand, words, filling, characters, brkk, screensize, check, terminal, leading, tracking, size, alignment,  keys, breaks;
+
+//Colour variables
+var rcol, gcol, bcol, rback, gback, bback;
 
 //All the counter variables, which tells you how many times I have counters.
 var i, j, k, l, m, n, p;
@@ -53,10 +56,15 @@ function setup() {
   alignment = LEFT;
   
   
-  //Colour stuff
+  //Text Colour stuff
   rcol = 0;
   gcol = 255;
   bcol = 0;
+  
+  //Background colour stuff
+  rback = 0;
+  gback = 0;
+  bback = 0;
   
   //This is used later to say if the command exists.
   check = true;
@@ -76,7 +84,7 @@ function draw() {
   
  
   //Redrawing the background so the font doesn't get fuzzy.
-  background(0);
+  background(rback, gback, bback);
   
   screensize = round(width/11);
   
@@ -150,7 +158,7 @@ function draw() {
       strokeWeight(2);
       stroke(255);
       line(0, height-54, width, height-54);
-      fill(0);
+      fill(rback,gback,bback);
       noStroke();
       rect(0,height-54,width, height-54);
     pop();
@@ -167,7 +175,7 @@ function draw() {
     push();
       strokeWeight(2);
       stroke(0);
-      fill(0);
+      fill(rback, gback, bback);
       rect(width*0.74, 0, 400, 40);
     pop();
     textSize(24);
@@ -370,6 +378,10 @@ function COLR(){
   rcol = 255;
   gcol = 51;
   bcol = 0;
+  
+  rback = 0;
+  gback = 0;
+  bback = 0;
   maintxt ="> Text colour changed to:brk> !RED!";
   
 }
@@ -379,6 +391,10 @@ function COLG(){
   rcol = 0;
   gcol = 255;
   bcol = 0;
+  
+  rback = 0;
+  gback = 0;
+  bback = 0;
   maintxt ="> Text colour changed to:brk> !GREEN!";
 }
 
@@ -387,6 +403,10 @@ function COLB(){
   rcol = 0;
   gcol = 179;
   bcol = 255;
+  
+  rback = 0;
+  gback = 0;
+  bback = 0;
   maintxt ="> Text colour changed to:brk> !BLUE!";
   
 }
@@ -396,6 +416,10 @@ function COLW(){
   rcol = 255;
   gcol = 255;
   bcol = 255;
+  
+  rback = 0;
+  gback = 0;
+  bback = 0;
   maintxt ="> Text colour changed to:brk> !WHITE!";
 }
 
@@ -409,6 +433,11 @@ function RSET(){
   rcol = 0;
   gcol = 255;
   bcol = 0;
+  
+  rback = 0;
+  gback = 0;
+  bback = 0;
+  
   alignment = LEFT;
   size = 32;
   leading = 32;
@@ -424,7 +453,7 @@ function DWLD(){
 //EASTER EGGS (Not essential but just for fun)
 //Displays all the easter eggs within the sampler
 function EGGS(){
-  maintxt="> ?S3cr3T C0d3s?brkbrk> HWLDbrk> BLDRbrk> ERORbrk> WASDbrk> TRONbrk> NGYUbrk> RNBWbrk> ATTK";
+  maintxt="> ?S3cr3T C0d3s?brkbrk> HWLDbrk> BLDRbrk> ERORbrk> WASDbrk> TRONbrk> NGYUbrk> RNBWbrk> ATTKbrk> FACEbrk> ASPObrk> NIERbrk> LGHT";
 }
 
 //Selects a random fill colour.
@@ -432,6 +461,11 @@ function RNBW(){
  rcol = random(0, 240);
  gcol = random(0, 240);
  bcol = random(0, 240);
+ 
+ rback = 0;
+ gback = 0;
+ bback = 0;
+ 
  maintxt = "> Fill colour changed randomlybrkbrk"+maintxt;
 }
 
@@ -473,6 +507,10 @@ function TRON(){
   rcol = 0;
   gcol = 123;
   bcol = 255;
+  
+ rback = 0;
+ gback = 0;
+ bback = 0;
 }
 
 //Battle between A and K
@@ -490,6 +528,46 @@ function ATTK(){
   }
 }
 
+//Some faces created out of the typeface
+function FACE() {
+ maintxt="> ?FACE?brk> Enjoy some faces made out of Terminal-10brkbrk> W^Wbrk> T_T";
+}
+
+//2001: A Space Odyssey - Reference to HAL 9000.
+function ASPO() {
+ maintxt="> ?ASPO?brkbrk> Good afternoon... gentlemen.brk> I am a HAL 9000... computer.brk> I became operational at the H.A.L. plant in Urbana, Illinois... on the 12th of January 1992.brk> My instructor was Mr. Langley... and he taught me to sing a song.brk> If you'd like to hear it I can sing it for you.";
+ rcol = 255;
+ gcol = 0;
+ bcol = 0;
+ 
+ rback = 0;
+ gback = 0;
+ bback = 0;
+}
+
+//A reference to a video game about androids and robots and existential dread. It's UI colour pallete looked cool so I decided to add it to the sampler
+function NIER() {
+ maintxt="> ?NIER?brk> Colour pallete now set to AUTOMATA";
+ rback = 255;
+ gback = 244;
+ bback = 203;
+ 
+ rcol = 104;
+ gcol = 100;
+ bcol = 88;
+}
+
+//Light mode for the sampler
+function LGHT(){
+ maintxt="> ?LGHT?brk> Light mode activated";
+ rback = 255;
+ gback = 255;
+ bback = 255;
+ 
+ rcol = 0;
+ gcol = 0;
+ bcol = 0;
+}
 
 //The error function
 function ERROR(){
