@@ -138,7 +138,7 @@ function draw() {
   if(check === false){
     
     //Runs multiple lines of error characters.
-    for(j=0; j<(size); j++){
+    for(j=0; j<50; j++){
       for(k=0; k<words.length; k++) {
         if(frameCount>10*k) {
           text(words[k], 32*k, leading*j, width-10, height);
