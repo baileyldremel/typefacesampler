@@ -1,4 +1,4 @@
-//Version 10 here we go.
+//Version A (as in for Assessment)
 
 //This is an array of all the commands a user can execute.
 var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU", "RSET", "ATTK", "FACE", "ASPO", "NIER", "LGHT"];
@@ -36,7 +36,7 @@ function preload(){
 }
 
 function setup() {
-  
+
   //Sets up the canvas as the window size and sets the background to black.
   createCanvas(windowWidth, windowHeight);
   background(0);
@@ -51,8 +51,8 @@ function setup() {
   breaks = 0;
   
   //All these values are variables as the user can change them at will.
-  size = 32;
-  leading = 32;
+  size = 24;
+  leading = 24;
   alignment = LEFT;
   
   
@@ -81,12 +81,10 @@ function setup() {
 
 
 function draw() {
-  
- 
   //Redrawing the background so the font doesn't get fuzzy.
   background(rback, gback, bback);
   
-  screensize = round(width/11);
+  screensize = round(width/14);
   
   //The following are settings that they user can adjust.
   //The adjustments can be done to the fill colour, text size, leading and the alignment.
@@ -101,53 +99,53 @@ function draw() {
     
     //Splits the main text into lines. I'm using the characters 'brk' to indicate a break.
     lines=maintxt.split('brk');
-      breaks = 1;
-      brkk = 0;
+    breaks = 1;
+    brkk = 0;
       
-      //This for loop writes the lines of text over time.
-      for(i=0; i<lines.length; i++){
-        filling = screensize - size;
-        characters = lines[i].split('');
+    //This for loop writes the lines of text over time.
+    for(i=0; i<lines.length; i++){
+      filling = screensize - size;
+      characters = lines[i].split('');
         
-        //This is checking to see if the line's character length is longer than the filling for the screen.
-        //I am calling this the Line Breaks code.
-        if(characters.length > filling){
-          for(p = 0; p < characters.length; p++){
-            if(p === (filling*breaks)){
-             breaks = breaks+1;
-            }
+      //This is checking to see if the line's character length is longer than the filling for the screen.
+      //I am calling this the Line Breaks code.
+      if(characters.length > filling){
+        for(p = 0; p < characters.length; p++){
+          if(p === (filling*breaks)){
+            breaks = breaks+1;
           }
-        } else {
-         characters = ''; 
         }
-        //Every 30 frames the line of text is drawn.
-        if(frameCount>30*i) {
+      } else {
+        characters = ''; 
+      }
+      //Every 30 frames the line of text is drawn.
+      if(frameCount>30*i) {
           
         text(lines[i], 10, 30+(i*leading)+(brkk), width-10, height);
-        
+        console.log(lines[i]);
+        console.log("Breaks: "+brkk);
         if(breaks > 1){
           if(breaks == 1){
            brkk = leading * 1; 
           }else{
-            brkk = leading * (breaks-1);  
+          brkk = leading * (breaks-1);  
           }
-         }
         }
-       }
-      
-    }
+      }
+    }      
+  }
   //If the command doesn't exist in the array, it runs this code instead.  
   if(check === false){
     
     //Runs multiple lines of error characters.
     for(j=0; j<(size); j++){
       for(k=0; k<words.length; k++) {
-       if(frameCount>10*k) {
-         text(words[k], 32*k, leading*j, width-10, height);
-         }
-       }
+        if(frameCount>10*k) {
+          text(words[k], 32*k, leading*j, width-10, height);
+        }
       }
     }
+  }
   
   //Anything below here is stuff that doesn't change often and is stable.
   
@@ -171,22 +169,20 @@ function draw() {
   
   //Info text, which sits in the top right corner of the screen.
   push();
-    //The black box behind the info text. 
+    //The box behind the info text. 
     push();
-      strokeWeight(2);
-      stroke(0);
       fill(rback, gback, bback);
-      rect(width*0.74, 0, 400, 40);
+      rect(width*0.70, 0, 500, 40);
     pop();
     textSize(24);
     textAlign(RIGHT);
-    textLeading(32);
+    textLeading(26);
     text("Font size: "+size+"pt. Font leading: "+leading+"pt", width, 30);
   pop();
   
   //This writes the character pressed onto the screen. The value writing the character is keys.
   push();
-    textSize(width/2);
+    textSize(width/3);
     textAlign(CENTER, CENTER);
     text(keys, width/2, height/2);
   pop();
@@ -206,46 +202,44 @@ function keyTyped(){
     
     //Checks to see if there is a value in entertxt. Without it, it would write 'Undefined' first.
     if(entertxt === "") {
-       entertxt = key;
-       hold = key;
-       //If there is something in there, it just adds to it.
-       } else {
+      entertxt = key;
+      hold = key;
+      //If there is something in there, it just adds to it.
+    } else {
        entertxt = entertxt+key; 
        hold = key;
     }
-    
   }
   //This code stops the program from writing enter, but plays the enter key SFX.
   if(keyCode === ENTER){
-   keys = ""; 
-   enterkey.play();
+    keys = ""; 
+    enterkey.play();
   }
 }
 
 function keyPressed(){
   
- //Resets input.
+  //Resets input.
  
- hdrive.stop(); 
- input = [];
- if (keyCode === ENTER) {
+  hdrive.stop(); 
+  input = [];
+  if (keyCode === ENTER) {
+    
+    //Resets frameCount back to zero when the user presses enter.
+    frameCount=0;
    
+    //Sets execute to false, which also checks to see if the function exists.
+    var execute = false;
    
-   //Resets frameCount back to zero when the user presses enter.
-   frameCount=0;
+    //This sets the enter text to uppercase as that is what I had written the commands as.
+    input = entertxt.toUpperCase();
    
-   //Sets execute to false, which also checks to see if the function exists.
-   var execute = false;
-   
-   //This sets the enter text to uppercase as that is what I had written the commands as.
-   input = entertxt.toUpperCase();
-   
-   //So, this line of code goes through every single elements in the commands array.
-   for(l=0; l<commands.length; l++){
+    //So, this line of code goes through every single elements in the commands array.
+    for(l=0; l<commands.length; l++){
      
-     //This is a check to see if the command matches what the user has input.
+      //This is a check to see if the command matches what the user has input.
       if(input === commands[l]) {
-        
+          
         //This sets the command as true, which says that it has found the command
         check = true;
         
@@ -255,42 +249,42 @@ function keyPressed(){
         //THX to https://www.labnol.org/code/20181-call-javascript-function-by-name. Figured it out!
         //This function grabs the command and executes the function. AKA Run this function.
         this[func]();
-        
+      
         //Sets execute to true
         execute = true;
         
         //Whenever I code, I always seem to add a break. This is a break, which breaks the code and is cool. 
         break;
-     }
-   }
+       }
+    }
    
-   //If execute is still false.
-   if (!execute) {
+    //If execute is still false.
+    if (!execute) {
      
-     //This is a special function that changes the text if the command isn't found.
-     ERROR();
+      //This is a special function that changes the text if the command isn't found.
+      ERROR();
      
-     //Plays the hard drive SFX
-     hdrive.play();
-   }
+      //Plays the hard drive SFX
+      hdrive.play();
+    }
    
-   //Blanks entertext.
-   entertxt = "";
+    //Blanks entertext.
+    entertxt = "";
    
- }
+  }
  
  //This function adds the previous function back into the enter text, which can be used for changing the size/leading up or down.
  
- if (keyCode === UP_ARROW) {
-   if(func != ""){
-     entertxt = func;
-   }
- }
+  if (keyCode === UP_ARROW) {
+    if(func != ""){
+      entertxt = func;
+    }
+  }
  
- //This clears the enter text as well.
- if (keyCode === BACKSPACE){
-     entertxt = "";
-     keys = "";
+  //This clears the enter text as well.
+  if (keyCode === BACKSPACE) {
+    entertxt = "";
+    keys = "";
   }
 }
 
@@ -300,8 +294,8 @@ function keyPressed(){
 //MAIN FUNCTIONS (Stuff that is useful to the sampler)
 //Help text that has all the main functions in it.  
 function HELP(){
-  size = 32;
-  leading = 32;
+  size = 24;
+  leading = 24;
   maintxt = "> HELPbrk> To use this sampler, type in a four letter command then press [ENTER] and you will receive a response.brk> If you make a mistake, press the [BACKSPACE] button and type your command.brk> If you wish to enter the same command again, press the [UP ARROW] and then [ENTER].brkbrk> Here are a list of commands you can execute (!PLEASE NOTE!: Commands are not case sensitive):brkbrk> HELP - You are here.brk> SMPT - Sample text.brk> SMPB - Sample Body Copybrk> LEDU/LEDD - Changes the leading up and down by 2pt.brk> SIZU/SIZD - Point size up and down by 4pt.brk> ALGL/ALGC/ALGR - Align left, center and right respectively.brk> ABOT - About the typeface.brk> COLR/COLG/COLB/COLW - Change colour to red, green, blue or white.brk> CLER - Clears the screen (not including the info text)brk> DWLD - Downloads Terminal-10 for you to use.brk> RSET - Resets everything back to default valuesbrkbrk> The list is not complete, some of the commands may be hiding in their EGGS.";
 }
 
@@ -364,7 +358,7 @@ function ALGR(){
 
 //Writes text about the font.
 function ABOT(){
-  maintxt ="> !ABOUT TERMINAL-10!brkbrk> Terminal-10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> The typeface was inspired by the Mike Kellys VR and Nillands typefaces, the computer programming typefaces of old and new, as well computer terminals.";
+  maintxt ="> !ABOUT TERMINAL-10!brkbrk> Terminal-10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> Terminal-10 is a monospaced display typeface based on ones and zeroes, old computers terminals and out of this world alien writing.brk> With inspiration from Mike Kelly’s award winning typeface ‘Virtual Reality’ and Manfred Klein’s’ ‘Nilland’, Terminal-10 is influenced by two styles whilst being transported back to the generation of old computer terminals and the future of alien language.";
 }
 
 //Writes all the characters of the font.
@@ -425,7 +419,7 @@ function COLW(){
 
 //Clears the main txt
 function CLER(){
- maintxt  = "";
+  maintxt  = "";
 }
 
 //Resets everything back to the default values
@@ -439,8 +433,8 @@ function RSET(){
   bback = 0;
   
   alignment = LEFT;
-  size = 32;
-  leading = 32;
+  size = 24;
+  leading = 24;
   maintxt = "> !RESET!brkbrk> Colour reset to greenbrk> Text size and leading reset to 32ptbrk> Alignment reset to the left";
 }
 
@@ -458,40 +452,40 @@ function EGGS(){
 
 //Selects a random fill colour.
 function RNBW(){
- rcol = random(0, 240);
- gcol = random(0, 240);
- bcol = random(0, 240);
+  rcol = random(0, 240);
+  gcol = random(0, 240);
+  bcol = random(0, 240);
  
- rback = 0;
- gback = 0;
- bback = 0;
+  rback = 0;
+  gback = 0;
+  bback = 0;
  
- maintxt = "> Fill colour changed randomlybrkbrk"+maintxt;
+  maintxt = "> Fill colour changed randomlybrkbrk"+maintxt;
 }
 
 //Plays a song called 'hello world' by Louie Zong in a new window.
 function HWLD(){
- size = 32;
- leading = 32;
- maintxt = "> ?HELLO WORLD?brk> by Louie Zongbrkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brkbrk> Find by voicebrk> Although it sounds like bits and bytesbrk> My circuitry is is filled with mitesbrk> Hello, worldbrkbrk> Oh, will I find a lovebrk> Oh, or a power plugbrk> Oh, digitally isolatedbrk> Oh, creator, please don't leave me waiting.brkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brk> https://www.youtube.com/watch?v=Yw6u6YkTgQ4";
- window.open("https://www.youtube.com/watch?v=Yw6u6YkTgQ4", "_blank", 'toolbar=0,location=0,menubar=0');
+  size = 24;
+  leading = 24;
+  maintxt = "> ?HELLO WORLD?brk> by Louie Zongbrkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brkbrk> Find by voicebrk> Although it sounds like bits and bytesbrk> My circuitry is is filled with mitesbrk> Hello, worldbrkbrk> Oh, will I find a lovebrk> Oh, or a power plugbrk> Oh, digitally isolatedbrk> Oh, creator, please don't leave me waiting.brkbrk> Hello, worldbrk> Programmed to work and not to feelbrk> Not even sure that this is realbrk> Hello, world.brk> https://www.youtube.com/watch?v=Yw6u6YkTgQ4";
+  window.open("https://www.youtube.com/watch?v=Yw6u6YkTgQ4", "_blank", 'toolbar=0,location=0,menubar=0');
 }
 
 //Writes something to the console.
 function WASD(){
- maintxt = "> ?WASD?brk> Check your console (Ctrl/Cmd + Shift + j)";
- console.log("There's dust in the Gradius cartridge. Blow in the cartridge and try again.");
+  maintxt = "> ?WASD?brk> Check your console (Ctrl/Cmd + Shift + j)";
+  console.log("There's dust in the Gradius cartridge. Blow in the cartridge and try again.");
 }
 
 //Writes my icon to the screen
 function BLDR(){
- maintxt="> ?BLDR?brk> |                    |brk> |_ _         _ _|brk> |  .   \u005C  /  .  |brk> |_ _/    \u005C_ _|brk>            /brk>         / _ _brkbrk> baileyldremel was here 2021";
+  maintxt="> ?BLDR?brk> |                      |brk> |_ _         _ _|brk> |  .   \u005C  /  .  |brk> |_ _/    \u005C_ _|brk>            /brk>         / _ _brkbrk> baileyldremel was here 2021";
 }
 
 //Sends an alert to the browser.
 function EROR(){
   maintxt="> ?EROR?brk> What do you think you're doing?";
- alert("Did you expect an error? Not gonna happen! Try something else."); 
+  alert("Did you expect an error? Not gonna happen! Try something else."); 
 }
 
 //Plays a video in a new browser screen.
@@ -508,9 +502,9 @@ function TRON(){
   gcol = 123;
   bcol = 255;
   
- rback = 0;
- gback = 0;
- bback = 0;
+  rback = 0;
+  gback = 0;
+  bback = 0;
 }
 
 //Battle between A and K
@@ -518,8 +512,8 @@ function ATTK(){
   let coin = random(0,2);
   
   if(coin <1){
-   awin = awin + 1;
-   maintxt="> ?ATTK?brk> Who would win in a battle between A and K?brkbrk> A wins, amazing the crowd with their many glyphs and characters!brkbrk> A wins = "+awin+".brk> K wins = "+kwin+".";
+    awin = awin + 1;
+    maintxt="> ?ATTK?brk> Who would win in a battle between A and K?brkbrk> A wins, amazing the crowd with their many glyphs and characters!brkbrk> A wins = "+awin+".brk> K wins = "+kwin+".";
   }
   
   if(coin >1){
@@ -530,43 +524,43 @@ function ATTK(){
 
 //Some faces created out of the typeface
 function FACE() {
- maintxt="> ?FACE?brk> Enjoy some faces made out of Terminal-10brkbrk> W^Wbrk> T_T";
+  maintxt="> ?FACE?brk> Enjoy some faces made out of Terminal-10brkbrk> W^Wbrk> T_T";
 }
 
 //2001: A Space Odyssey - Reference to HAL 9000.
 function ASPO() {
- maintxt="> ?ASPO?brkbrk> Good afternoon... gentlemen.brk> I am a HAL 9000... computer.brk> I became operational at the H.A.L. plant in Urbana, Illinois... on the 12th of January 1992.brk> My instructor was Mr. Langley... and he taught me to sing a song.brk> If you'd like to hear it I can sing it for you.";
- rcol = 255;
- gcol = 0;
- bcol = 0;
+  maintxt="> ?ASPO?brkbrk> Good afternoon... gentlemen.brk> I am a HAL 9000... computer.brk> I became operational at the H.A.L. plant in Urbana, Illinois... on the 12th of January 1992.brk> My instructor was Mr. Langley... and he taught me to sing a song.brk> If you'd like to hear it I can sing it for you.";
+  rcol = 255;
+  gcol = 0;
+  bcol = 0;
  
- rback = 0;
- gback = 0;
- bback = 0;
+  rback = 0;
+  gback = 0;
+  bback = 0;
 }
 
 //A reference to a video game about androids and robots and existential dread. It's UI colour pallete looked cool so I decided to add it to the sampler
 function NIER() {
- maintxt="> ?NIER?brk> Colour pallete now set to AUTOMATA";
- rback = 255;
- gback = 244;
- bback = 203;
+  maintxt="> ?NIER?brk> Colour palette now set to AUTOMATA";
+  rback = 255;
+  gback = 244;
+  bback = 203;
  
- rcol = 104;
- gcol = 100;
- bcol = 88;
+  rcol = 104;
+  gcol = 100;
+  bcol = 88;
 }
 
 //Light mode for the sampler
 function LGHT(){
- maintxt="> ?LGHT?brk> Light mode activated";
- rback = 255;
- gback = 255;
- bback = 255;
+  maintxt="> ?LGHT?brk> Light mode activated";
+  rback = 255;
+  gback = 255;
+  bback = 255;
  
- rcol = 0;
- gcol = 0;
- bcol = 0;
+  rcol = 0;
+  gcol = 0;
+  bcol = 0;
 }
 
 //The error function
@@ -576,15 +570,15 @@ function ERROR(){
   alignment = LEFT;
   //This creates random characters that populate the screen.
   for(n = 0; n<(50+size); n++){
-   rand = int(random(33, 126));
-   letter = char(rand);
+    rand = int(random(33, 126));
+    letter = char(rand);
    
-   //This checks if the maintxt is empty or not and writes text accordingly.
-   if(maintxt == ""){
-    maintxt = letter;
-   } else {
-    maintxt = maintxt + letter; 
-   }
+    //This checks if the maintxt is empty or not and writes text accordingly.
+    if(maintxt == ""){
+      maintxt = letter;
+    } else {
+      maintxt = maintxt + letter; 
+    }
   }
   
   words=maintxt.split('');
@@ -594,6 +588,8 @@ function ERROR(){
 
 //Resized window.
 function windowResized() {
+  
+  alert("For the intended experience, please ensure your window is full screen. Errors may occur due to the smaller screen size. You have been warned");
   resizeCanvas(windowWidth, windowHeight);
   text(lines[i], 10, 20+(i*leading), width-10, height);
 }
