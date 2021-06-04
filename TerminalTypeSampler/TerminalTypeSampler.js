@@ -79,7 +79,7 @@ function setup() {
   awin = 0;
   kwin = 0;
   
-  maintxt = "> Terminal-10brk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> !HOW TO USE SAMPLER!brk> Type in a four letter command then press [ENTER] on your keyboard (commands are in uppercase).brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brk> If you wish to reset the everything, type RSET.brkbrk> Type HELP to view the full list of commands.";
+  maintxt = "> Terminal10brk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> !HOW TO USE SAMPLER!brk> Type in a four letter command then press [ENTER] on your keyboard (commands are in uppercase).brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brk> If you wish to reset the everything, type RSET.brkbrk> Type HELP to view the full list of commands.";
   entertxt="";
   
 }
@@ -363,7 +363,7 @@ function ALGR(){
 
 //Writes text about the font.
 function ABOT(){
-  maintxt ="> !ABOUT TERMINAL-10!brkbrk> Terminal-10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> Terminal-10 is a monospaced display typeface based on ones and zeroes, old computers terminals and out of this world alien writing.brk> With inspiration from Mike Kelly’s award winning typeface ‘Virtual Reality’ and Manfred Klein’s’ ‘Nilland’, Terminal-10 is influenced by two styles whilst being transported back to the generation of old computer terminals and the future of alien language.";
+  maintxt ="> !ABOUT TERMINAL10!brkbrk> Terminal10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> Terminal10 is a monospaced display typeface based on ones and zeroes, old computers terminals and out of this world alien writing.brk> With inspiration from Mike Kelly’s award winning typeface ‘Virtual Reality’ and Manfred Klein’s’ ‘Nilland’, Terminal-10 is influenced by two styles whilst being transported back to the generation of old computer terminals and the future of alien language.";
 }
 
 //Writes all the characters of the font.
