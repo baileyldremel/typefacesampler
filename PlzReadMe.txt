@@ -11,13 +11,18 @@ Karen Ann Donnachie - AtotheK GitHub Repository (https://github.com/karenanndonn
 
 Amit Agarwal - Call JavaScript Function by String Name (https://www.labnol.org/code/20181-call-javascript-function-by-name)
 
+Adam Coti - Meta Tags for social media (https://css-tricks.com/essential-meta-tags-social-media/)
+
 
 --EASTER EGGS--
-Hello World by Louie Zong (https://www.youtube.com/watch?v=Yw6u6YkTgQ4)
+HWLD - Hello World by Louie Zong (https://www.youtube.com/watch?v=Yw6u6YkTgQ4)
 
-Tron directed by Steven Lisberger
+TRON - Tron directed by Steven Lisberger
 
-Never Gonna Give You up by Rick Astley as well as rvizzz ASCII adaptation of the music video (https://www.youtube.com/watch?v=ahnfLZKwnTg)
+NGYU - Never Gonna Give You up by Rick Astley as well as rvizzz ASCII adaptation of the music video (https://www.youtube.com/watch?v=ahnfLZKwnTg)
 
-Gradius (1985) developed by Konami (First game with the Konami code)
+WASD - Gradius (1985) developed by Konami (First game with the Konami code)
 
+ASPO - 2001: A Space Odyssey directed by Stanley Kubrick
+
+NIER - NieR: Automata developed by Platinum Games and designed by Takahisa Taura, Isao Negishi and Yoko Taro
