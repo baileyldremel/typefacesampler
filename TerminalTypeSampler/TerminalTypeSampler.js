@@ -26,6 +26,8 @@ var hdrive, keyboard, enterkey;
 
 var awin, kwin;
 
+var widthw, heighth;
+
 //Loads the font and the sounds. 
 function preload(){
   terminal=loadFont('data/Terminal10.otf');
@@ -40,6 +42,9 @@ function setup() {
   //Sets up the canvas as the window size and sets the background to black.
   createCanvas(windowWidth, windowHeight);
   background(0);
+  
+  widthw = width;
+  heighth = height;
   
   //Custom cursor.
   cursor('data/cursor.png');
@@ -306,7 +311,7 @@ function SMPT(){
 
 //Adds a body paragraph.
 function SMPB(){
-  maintxt = "> !SAMPLE BODYCOPY! brk> Currently at "+size+"pt with "+leading+"pt leading. brkbrk> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.brk> Testingbrk> 1, 2, 3";
+  maintxt = "> !SAMPLE BODYCOPY! brk> Currently at "+size+"pt with "+leading+"pt leading. brkbrk> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 }
 
 //LEADING SETTINGS
@@ -376,7 +381,7 @@ function COLR(){
   rback = 0;
   gback = 0;
   bback = 0;
-  maintxt ="> Text colour changed to:brk> !RED!";
+  maintxt ="> Text colour changed to:brk> Red";
   
 }
 
@@ -389,7 +394,7 @@ function COLG(){
   rback = 0;
   gback = 0;
   bback = 0;
-  maintxt ="> Text colour changed to:brk> !GREEN!";
+  maintxt ="> Text colour changed to:brk> Green";
 }
 
 //Changes colour to blue
@@ -401,7 +406,7 @@ function COLB(){
   rback = 0;
   gback = 0;
   bback = 0;
-  maintxt ="> Text colour changed to:brk> !BLUE!";
+  maintxt ="> Text colour changed to:brk> Blue";
   
 }
 
@@ -414,7 +419,7 @@ function COLW(){
   rback = 0;
   gback = 0;
   bback = 0;
-  maintxt ="> Text colour changed to:brk> !WHITE!";
+  maintxt ="> Text colour changed to:brk> White";
 }
 
 //Clears the main txt
@@ -435,7 +440,7 @@ function RSET(){
   alignment = LEFT;
   size = 24;
   leading = 24;
-  maintxt = "> !RESET!brkbrk> Colour reset to greenbrk> Text size and leading reset to 32ptbrk> Alignment reset to the left";
+  maintxt = "> !RESET!brkbrk> Colour reset to green and background reset to black.brk> Text size and leading reset to 24pt.brk> Alignment reset to the left";
 }
 
 //Downloads the font to the users computer.
@@ -589,7 +594,15 @@ function ERROR(){
 //Resized window.
 function windowResized() {
   
-  alert("For the intended experience, please ensure your window is full screen. Errors may occur due to the smaller screen size. You have been warned");
+  if(widthw > width || heighth > height){
+    alert("For the intended experience, please ensure your window is full screen. Errors may occur due to the smaller screen size. You have been warned");
+    widthw = width;
+    heighth = height;
+  }else{
+    widthw = width;
+    heighth = height;
+  }
+  
   resizeCanvas(windowWidth, windowHeight);
   text(lines[i], 10, 20+(i*leading), width-10, height);
 }
