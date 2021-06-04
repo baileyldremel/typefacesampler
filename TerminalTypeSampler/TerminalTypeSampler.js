@@ -363,7 +363,7 @@ function ALGR(){
 
 //Writes text about the font.
 function ABOT(){
-  maintxt ="> !ABOUT TERMINAL10!brkbrk> Terminal10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> Terminal10 is a monospaced display typeface based on ones and zeroes, old computers terminals and out of this world alien writing.brk> With inspiration from Mike Kelly’s award winning typeface ‘Virtual Reality’ and Manfred Klein’s’ ‘Nilland’, Terminal-10 is influenced by two styles whilst being transported back to the generation of old computer terminals and the future of alien language.";
+  maintxt ="> !ABOUT TERMINAL10!brkbrk> Terminal10 was created by Bailey Dremel for the A to the K Studio in 2021.brk> Terminal10 is a monospaced display typeface based on ones and zeroes, old computers terminals and out of this world alien writing.brk> With inspiration from Mike Kelly's award winning typeface 'Virtual Reality' and Manfred Klein's' Nilland', Terminal10 is influenced by the two styles whilst being transported back to the generation of old computer terminals and the future of alien language.";
 }
 
 //Writes all the characters of the font.
