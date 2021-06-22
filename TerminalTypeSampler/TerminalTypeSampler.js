@@ -127,8 +127,6 @@ function draw() {
       if(frameCount>30*i) {
           
         text(lines[i], 10, 30+(i*leading)+(brkk), width-10, height);
-        console.log(lines[i]);
-        console.log("Breaks: "+brkk);
         if(breaks > 1){
           if(breaks == 1){
            brkk = leading * 1; 
