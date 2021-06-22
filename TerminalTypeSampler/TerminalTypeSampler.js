@@ -79,7 +79,7 @@ function setup() {
   awin = 0;
   kwin = 0;
   
-  maintxt = "> Terminal10brk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> !HOW TO USE SAMPLER!brk> Type in a four letter command then press [ENTER] on your keyboard (commands are in uppercase).brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brk> If you wish to reset the everything, type RSET.brkbrk> Type HELP to view the full list of commands.";
+  maintxt = "> Terminal10brk> A display font based on old computers and ones and zeros.brk> Created by Bailey Dremel.brkbrk> !HOW TO USE SAMPLER!brk> Type in a four letter command then press [ENTER] on your keyboard (commands are in uppercase).brkbrk> To view glyphs, type the corresponding key or type CHAR then enter.brk> To view a sample sentence, type SMPT.brk> To view a sample body paragraph, type SMPB.brk> To change character alignment, type ALGL, ALGC or ALGR.brk> To change font size, type SIZU or SIZD to change the size up or down.brk> If you wish to reset everything, type RSET.brkbrk> Type HELP to view the full list of commands.";
   entertxt="";
   
 }
