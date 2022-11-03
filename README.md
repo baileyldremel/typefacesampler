@@ -1,4 +1,7 @@
-# A to the K Project 2
+# Typeface Sampler
+## Created for University studio A to the K
 
-## Typeface Sampler
-The typeface sampler for my A to the K Studio project. Currently a work in progress.
+The typeface sampler for my A to the K Studio project.
+Currently going through some quality of life updates, stay tuned for more
+ 
+https://baileyldremel.com/typefacesampler/TerminalTypeSampler/
