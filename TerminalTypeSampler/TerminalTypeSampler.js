@@ -193,7 +193,7 @@ function draw() {
       background(0,0,0);
       fill(0,255,0);
       textAlign(CENTER,CENTER);
-      textSize(width/50);
+      textSize(width/25);
       text('Not yet optimised for mobile, please use a desktop setup', width/2, height/2);
   }
   
