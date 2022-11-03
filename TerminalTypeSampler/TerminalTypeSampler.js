@@ -190,6 +190,15 @@ function draw() {
     text(keys, width/2, height/2);
   pop();
   
+  if(widthw <=1200){
+    let toosmall = true;
+      background(0,0,0);
+      fill(0,255,0);
+      textAlign(CENTER,CENTER);
+      textSize(16);
+      text('Not yet optimised for mobile, please use a desktop setup', width/2, height/2);
+  }
+  
 }
 
 
