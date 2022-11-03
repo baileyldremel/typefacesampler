@@ -1,5 +1,3 @@
-//Version A (as in for Assessment)
-
 //This is an array of all the commands a user can execute.
 var commands = ["HELP","SMPT","SMPB","LEDU","LEDD","DWLD", "SIZU", "SIZD", "CHAR", "ALGL", "ALGR", "ALGC", "ABOT", "HWLD", "COLR", "COLG", "COLB", "COLW", "CLER", "EROR", "WASD", "BLDR", "EGGS", "JPEG", "TRON", "RNBW", "NGYU", "RSET", "ATTK", "FACE", "ASPO", "NIER", "LGHT"];
 
@@ -195,7 +193,7 @@ function draw() {
       background(0,0,0);
       fill(0,255,0);
       textAlign(CENTER,CENTER);
-      textSize(16);
+      textSize(12);
       text('Not yet optimised for mobile, please use a desktop setup', width/2, height/2);
   }
   
